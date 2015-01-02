@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="SBT: pl.setblack:badass:1.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/pl.setblack/badass/jars/badass-1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.ivy2/cache/pl.setblack/badass/docs/badass-1.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/pl.setblack/badass/srcs/badass-1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

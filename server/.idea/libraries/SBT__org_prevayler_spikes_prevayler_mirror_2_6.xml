@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="SBT: org.prevayler.spikes:prevayler-mirror:2.6">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/org.prevayler.spikes/prevayler-mirror/jars/prevayler-mirror-2.6.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.ivy2/cache/org.prevayler.spikes/prevayler-mirror/docs/prevayler-mirror-2.6-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/org.prevayler.spikes/prevayler-mirror/srcs/prevayler-mirror-2.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
