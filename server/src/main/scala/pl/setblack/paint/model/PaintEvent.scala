@@ -5,7 +5,7 @@ import java.awt.Color
 /**
  * Created by Kanapka on 1/2/2015.
  */
-class PaintEventt( id: Long,  author: User,
+class PaintEvent( id: Long,  author: User,
                    val x:Double,
                    val y:Double,
                    val radius:Double,

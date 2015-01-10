@@ -90,5 +90,14 @@
     <orderEntry type="library" name="SBT: pl.setblack:airomem-core:1.0" level="project" />
     <orderEntry type="library" name="SBT: pl.setblack:badass:1.0" level="project" />
     <orderEntry type="library" name="SBT: xpp3:xpp3_min:1.1.4c" level="project" />
+    <orderEntry type="module-library">
+      <library name="SBT: unmanaged-jars">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/java_websocket.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
