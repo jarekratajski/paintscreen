@@ -2,8 +2,10 @@ package pl.setblack.paint.api
 
 import java.awt.Color
 
+
 import akka.actor.{ActorSystem, Actor}
 import pl.setblack.paint.model._
+import pl.setblack.paint.ws.EventsActor
 import spray.http.MediaTypes._
 import spray.httpx.{SprayJsonSupport, Json4sSupport}
 import spray.json.DefaultJsonProtocol
@@ -16,6 +18,9 @@ class PaintServiceActor extends Actor with PaintService {
 
   def receive = runRoute(paintRoute ~ normalRoute)
 
+  def propagate(ev:Event ) = {
+    context.actorSelection("/event/ws") ! EventsActor.Send(ev)
+  }
 }
 
 
@@ -31,6 +36,8 @@ trait PaintService extends HttpService {
    System.out.println("I am here")
    getFromDirectory("C:/dev/prj/painscreen/client/app/")
  }
+
+  def propagate(ev:Event)
 
   val paintRoute = path("services" / "paint") {
     import EventJsonSupport._
@@ -53,12 +60,15 @@ trait PaintService extends HttpService {
             complete {
               System.out.println("event!" + event.x + "," + event.y)
               val user = new User("irek")
-              val ev = new PaintEvent(1, user, 9.0, 10.0, 0.2, Color.BLACK)
+              val ev = new PaintEvent(1, user, event.x, event.y, event.radius, Color.BLACK)
               room.addEvent(ev)
+              propagate(ev)
+
+
               "{\"status\": \"ok\"}"
             }
-          }
-        }
+      }
+  }
       }
 
 

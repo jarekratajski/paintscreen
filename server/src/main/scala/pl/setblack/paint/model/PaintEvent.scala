@@ -10,5 +10,7 @@ class PaintEvent( id: Long,  author: User,
                    val y:Double,
                    val radius:Double,
                    val c: Color ) extends Event(id, author){
-
+  override def toView  = {
+    AnyEvent(x,y,radius)
+  }
 }

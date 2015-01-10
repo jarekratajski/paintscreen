@@ -9,11 +9,8 @@ import scala.collection.mutable
 object EventsActor {
 
   sealed trait EventMessage
-
   case object Clear extends EventMessage
-
   case class Unregister(ws: WebSocket) extends EventMessage
-
   case class Send(ev: Event) extends EventMessage
 
 }
@@ -21,7 +18,7 @@ object EventsActor {
 class EventsActor extends Actor with ActorLogging {
   import EventsActor._
   import pl.setblack.paint.ws.ReactiveServer._
-
+  import pl.setblack.paint.api.EventJsonSupport._
   val clients = mutable.ListBuffer[WebSocket]()
 
 
@@ -46,6 +43,17 @@ class EventsActor extends Actor with ActorLogging {
       }
 
 
+    case Send(ev) => {
+      System.out.println("sending event");
+      import org.json4s._
+      import org.json4s.native.Serialization
+      import org.json4s.native.Serialization.{read, write}
+      implicit val formats = Serialization.formats(NoTypeHints)
+
+        for (client <- clients) client.send(write(ev.toView).toString)
+    }
+    case _ =>
+      System.out.println("reszta");
   }
 
 
