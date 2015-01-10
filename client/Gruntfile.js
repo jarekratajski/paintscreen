@@ -21,7 +21,7 @@ module.exports = function (grunt) {
                         https: false,
                         changeOrigin: true,
                         rewrite: {
-                            '^/': '/services/'
+                            
                         }
                     },
                     {
