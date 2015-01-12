@@ -72,6 +72,14 @@ paintscreen.controller('paintCtrl', ['$scope', 'paintService', function ($scope,
         }
         paintService.registerObserver( observer);
        
+       $scope.record = function () {
+            prepareRecording();
+            record();
+            setTimeout( function() {
+                stop();
+            }, 1000);
+       };
+
 
         $scope.mouseMoved = function (event) {
             if ($scope.draw) {

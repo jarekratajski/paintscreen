@@ -95,9 +95,21 @@ module.exports = function (grunt) {
                 configFile: 'karma.conf.js',
                 singleRun: true
             }
-        }
+        },
+        bowercopy: {
+      dist: {
+       options: {
+               destPrefix: "app/"
+            },
+            files: {
+                "":"bower_components/"
+            }
+      }
+    }
     });
-
+ grunt.registerTask('build', [
+        'bowercopy:dist'
+    ]);
     grunt.registerTask('test', [
         'karma:unit'
     ]);

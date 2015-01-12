@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>PaintScreen</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="css/app.css"/>
+    
+</head>
+<body data-ng-app="paintscreen">
+    <section class="main" data-ng-controller="paintCtrl">
+    <header>
+        <ul>
+            <li>PaintScreen</li>
+            <li>Draw</li>
+            <li> <input type="color" name="favcolor"></li>
+            <li><button data-ng-click="record()">Rec</button></li>
+        </ul>
+    </header>
+    <article class="screen" data-ng-mousemove="mouseMoved($event)"
+              data-ng-mouseup="mouseUp()" data-ng-mousedown="mouseDown()" data-semi-canvas="state.objects">
+              <!--
+            <figure data-ng-repeat="obj in state.objects" style="left: {{obj.x}}%;top:{{obj.y}}%"/>
+                -->
+    </article>
+    
+    
+    <footer></footer>
+  </section>
+
+
+    <!-- bower:js -->
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/recorderjs/recorder.js"></script>
+    <!-- endbower -->
+
+   <script src="js/paintscreen.js"></script>
+   <script src="js/audiocapture.js"></script>
+    <script src="//localhost:35729/livereload.js"></script>
+    <div data-spinner="globalSpinner"></div>
+</body>
+</html>

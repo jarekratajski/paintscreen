@@ -23,6 +23,13 @@ body > section > header {
   position: absolute;
   height: 2em;
 }
+body > section > header > ul {
+  max-height: 2em;
+}
+body > section > header > ul > li {
+  display: inline-block;
+  width: 3em;
+}
 body > section > article {
   border: 2px solid black;
   box-shadow: 2px  2px 6px gray;

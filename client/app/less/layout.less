@@ -13,8 +13,15 @@ body {
       position: absolute;
       
       >header {
-      position: absolute;
-      height: 2em;
+        position: absolute;
+        height: 2em;
+        > ul {
+            max-height: 2em;
+            > li {
+                display: inline-block;
+                width: 3em;
+            }
+        }
       }
       > article {
           .border();
