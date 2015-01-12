@@ -33,7 +33,7 @@ trait PaintService extends HttpService {
   val room = new Room("default")
 
  val normalRoute  = pathPrefix("") {
-   getFromDirectory("C:/dev/prj/painscreen/client/app/")
+   getFromDirectory("../client/app/")
  }
 
   def propagate(ev:GraphicObject)
