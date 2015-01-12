@@ -6,12 +6,12 @@ import scala.collection.Seq
 
 
 class Room(val name: String) extends Serializable {
- var events : CopyOnWriteArrayList[Event] = new CopyOnWriteArrayList[Event]()
+ var events : CopyOnWriteArrayList[GraphicObject] = new CopyOnWriteArrayList[GraphicObject]()
  def toView = new RoomView(name, events.toIndexedSeq)
 
- def addEvent(ev:Event) = {
+ def addEvent(ev:GraphicObject) = {
   events.add(ev)
  }
 }
 
-case class RoomView(val name: String, val events: Seq[Event])
+case class RoomView(val name: String, val events: Seq[GraphicObject])

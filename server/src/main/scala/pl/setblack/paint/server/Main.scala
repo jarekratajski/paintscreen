@@ -6,7 +6,7 @@ import akka.actor.{Actor, Props, ActorSystem}
 import akka.io.IO
 import akka.util.Timeout
 import pl.setblack.paint.api.PaintService
-import pl.setblack.paint.model.Event
+import pl.setblack.paint.model.GraphicObject
 import pl.setblack.paint.ws.{EventsActor, ReactiveServer}
 import spray.can.Http
 import scala.concurrent.duration._
@@ -19,7 +19,7 @@ class MainService extends  Actor with PaintService {
 
   def receive = runRoute(paintRoute ~ normalRoute)
 
-  def propagate(ev:Event ) = {
+  def propagate(ev:GraphicObject ) = {
     System.out.println("kuku")
     //context.actorSelection("/user/events") ! EventsActor.Send(ev)
     MainService.events ! EventsActor.Send(ev)

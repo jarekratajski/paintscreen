@@ -2,7 +2,7 @@ package pl.setblack.paint.ws
 
 import akka.actor.{Actor, ActorLogging}
 import org.java_websocket.WebSocket
-import pl.setblack.paint.model.Event
+import pl.setblack.paint.model.GraphicObject
 
 import scala.collection.mutable
 
@@ -11,7 +11,7 @@ object EventsActor {
   sealed trait EventMessage
   case object Clear extends EventMessage
   case class Unregister(ws: WebSocket) extends EventMessage
-  case class Send(ev: Event) extends EventMessage
+  case class Send(ev: GraphicObject) extends EventMessage
 
 }
 
