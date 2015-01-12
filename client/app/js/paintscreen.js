@@ -71,9 +71,9 @@ paintscreen.controller('paintCtrl', ['$scope', 'paintService', function ($scope,
             $scope.$apply(function() { $scope.state.objects.push(ev); } );
         }
         paintService.registerObserver( observer);
-       
+        prepareRecording();
        $scope.record = function () {
-            prepareRecording();
+           
             record();
             setTimeout( function() {
                 stop();

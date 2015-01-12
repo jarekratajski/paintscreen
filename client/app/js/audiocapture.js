@@ -25,7 +25,7 @@ function record() {
     // create new instance of Recorder.js using the mediaStreamSource
     rec = new Recorder(mediaStreamSource, {
       // pass the path to recorderWorker.js file here
-      workerPath: '/bower_components/Recorderjs/recorderWorker.js'
+      workerPath: 'bower_components/recorderjs/recorderWorker.js'
     });
 
     // start recording
@@ -36,12 +36,19 @@ function record() {
 }
 
 function stop() {
+   rec.getBuffer( function(data) {
+      console.log( data[0].length);
+      var len = Math.floor(data[0].length/100);
+      var arr=[];
+      for (var i = 0; i< data[0].length; i+=len) {
+        arr.push((data[0])[i]);
+      }
+      console.log(arr);
+  });
     // stop the media stream
   mediaStream.stop();
   
-   rec.getBuffer( function(left,right) {
-      console.log( left.length);
-  });
+  
   // stop Recorder.js
   rec.stop();
 

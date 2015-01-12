@@ -44,11 +44,12 @@ body > section > article {
   cursor: default;
 }
 body > section > article > figure {
+  color: white;
   position: absolute;
   display: block;
-  background: black;
-  width: 6px;
-  height: 6px;
+  background: white;
+  width: 16px;
+  height: 16px;
   border-radius: 100%;
   margin: 0px;
   z-index: 1;
@@ -80,6 +81,6 @@ div {
   padding: 0px;
 }
 body {
-  background-color: #6666ff;
+  background-color: #111166;
 }
 /*# sourceMappingURL=app.css.map */
