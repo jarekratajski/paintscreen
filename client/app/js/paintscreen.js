@@ -17,7 +17,7 @@ paintscreen.directive('semiCanvas', ['$parse', function($parse) {
           for (var index = newV-1; index >= oldV; index--) {
               var figure  =jQuery("<figure>");
               var obj = objects[index];
-              figure.attr('style', 'left:'+obj.x +"%;top:"+obj.y+"%;");
+              figure.attr('style', 'left:'+obj.x +"%;top:"+obj.y+"%;background-color:"+obj.c+";");
               element.append(figure);
           }
       });
@@ -83,9 +83,15 @@ paintscreen.controller('paintCtrl', ['$scope', '$timeout','paintService', functi
            
             record();
             $timeout( function() {
-                stop(drawWave);
-            }, 100);
+                stop(playWave);
+            }, 50);
        };
+
+       function playWave(data)  {
+            var ev = {"jsonClass":"WaveEvent","wave": data };
+            paintService.postEvent(ev);
+       }
+       
 
        function drawWave(data){
            var canvas = jQuery("<canvas width='1000' height='1000'>");
@@ -120,7 +126,7 @@ paintscreen.controller('paintCtrl', ['$scope', '$timeout','paintService', functi
              ctx.stroke();
              $timeout( function( ) {
                     $scope.record();
-             }, 500);
+             }, 100);
           
        }
        
