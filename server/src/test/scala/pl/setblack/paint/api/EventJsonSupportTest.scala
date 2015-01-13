@@ -9,7 +9,7 @@ class EventJsonSupportTest extends FlatSpec with Matchers {
   import org.json4s.native.Serialization.{read, write}
 
   "PutPixelEvent" should "be serialized " in {
-    val event = PutPixelEvent(7,5,2)
+    val event = PutPixelEvent(7,5,2,1)
     val serialized = write(event);
     serialized should equal ("""{"jsonClass":"PutPixelEvent","x":7.0,"y":5.0,"radius":2.0}""")
   }
@@ -18,17 +18,17 @@ class EventJsonSupportTest extends FlatSpec with Matchers {
 
     val serialized = """{"jsonClass":"PutPixelEvent","x":7.0,"y":5.0,"radius":2.0}"""
     val event = read[InputEvent](serialized)
-    event should equal (PutPixelEvent(7,5,2))
+    event should equal (PutPixelEvent(7,5,2,1))
   }
 
   "SetColorEvent" should "be serialized" in {
-    val event = SetColorEvent(0xffff00)
+    val event = SetColorEvent("#ffff00",1)
     val serialized = write(event);
-    serialized should equal ("""{"jsonClass":"SetColorEvent","c":16776960}""")
+    serialized should equal ("""{"jsonClass":"SetColorEvent","c":"#ffff00"}""")
   }
   "SetColorEvent" should "be deserialized" in {
-    val serialized = """{"jsonClass":"SetColorEvent","c":16776960}"""
+    val serialized = """{"jsonClass":"SetColorEvent","c":"#ffff00"}"""
     val event = read[InputEvent](serialized)
-    event should equal (SetColorEvent(0xffff00))
+    event should equal (SetColorEvent("#ffff00",1))
   }
 }

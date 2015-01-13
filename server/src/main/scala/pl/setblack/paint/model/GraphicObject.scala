@@ -1,12 +1,14 @@
 package pl.setblack.paint.model
 
 import pl.setblack.paint.api.{PutPixelEvent, InputEvent}
-
+import pl.setblack.paint.model.GraphicObjectView
 /**
  * Created by Kanapka on 1/2/2015.
  */
-class GraphicObject(val id: Long, val author: User) extends Serializable {
- def toView  = {
-   PutPixelEvent(0,0,0)
- }
+
+
+abstract class GraphicObject(val id: Long) extends Serializable {
+ def toView:GraphicObjectView ;
+
 }
+

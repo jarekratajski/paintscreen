@@ -20,8 +20,9 @@ class PaintServiceActor extends Actor with PaintService {
 
   def receive = runRoute(paintRoute ~ normalRoute)
 
-  def propagate(ev:GraphicObject ) = {
-    context.actorSelection("/event/ws") ! EventsActor.Send(ev)
+  def propagate(ev:Seq[GraphicObject] ) = {
+    System.out.println("tu nie chcialem byc")
+    //context.actorSelection("/event/ws") ! EventsActor.Send(ev)
   }
 }
 
@@ -36,7 +37,7 @@ trait PaintService extends HttpService {
    getFromDirectory("../client/app/")
  }
 
-  def propagate(ev:GraphicObject)
+  def propagate(ev:Seq[GraphicObject])
 
   val paintRoute = path("services" / "paint") {
     import EventJsonSupport._
@@ -53,12 +54,14 @@ trait PaintService extends HttpService {
         respondWithMediaType(`application/json`) {
           entity(as[String]) { serialized =>
             complete {
-              val event = read[PutPixelEvent](serialized)
-              System.out.println("event!" + event.x + "," + event.y)
-              val user = new User("irek")
-              val ev = new Pixel(1, user, event.x, event.y, event.radius, Color.BLACK)
-              room.addEvent(ev)
-              propagate(ev)
+              val event = read[InputEvent](serialized)
+              val  processed:Seq[GraphicObject] = room.processEvent(event);
+              System.out.println("processed"+ processed.size)
+              propagate ( processed)
+
+
+
+
               "{\"status\": \"ok\"}"
             }
       }

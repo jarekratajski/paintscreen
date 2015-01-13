@@ -11,21 +11,21 @@ object EventsActor {
   sealed trait EventMessage
   case object Clear extends EventMessage
   case class Unregister(ws: WebSocket) extends EventMessage
-  case class Send(ev: GraphicObject) extends EventMessage
+  case class Send(ev: Seq[GraphicObject]) extends EventMessage
 
 }
 
 class EventsActor extends Actor with ActorLogging {
   import EventsActor._
   import pl.setblack.paint.ws.ReactiveServer._
-  import pl.setblack.paint.api.EventJsonSupport._
+  import pl.setblack.paint.api.PixelJsonSupport._
   val clients = mutable.ListBuffer[WebSocket]()
 
 
   override def receive = {
     case Open(ws, hs) =>
       clients += ws
-
+      ws.send("Nic")
       log.debug("registered monitor for url {}", ws.getResourceDescriptor)
 
     case Close(ws, code, reason, ext) => self ! Unregister(ws)
@@ -43,14 +43,15 @@ class EventsActor extends Actor with ActorLogging {
       }
 
 
-    case Send(ev) => {
+    case Send(ev:Seq[GraphicObject]) => {
       System.out.println("sending event");
       import org.json4s._
       import org.json4s.native.Serialization
       import org.json4s.native.Serialization.{read, write}
-      implicit val formats = Serialization.formats(NoTypeHints)
 
-        for (client <- clients) client.send(write(ev.toView).toString)
+      val output = ev.map(x => x.toView)
+      System.out.println("writing:"+write(output).toString+" of " + output.size+"" +output.head.getClass)
+        for (client <- clients) client.send(write(output).toString)
     }
     case _ =>
       System.out.println("reszta");

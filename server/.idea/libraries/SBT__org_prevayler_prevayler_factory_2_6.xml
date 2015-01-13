@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="SBT: org.prevayler:prevayler-factory:2.6">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/org.prevayler/prevayler-factory/jars/prevayler-factory-2.6.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.ivy2/cache/org.prevayler/prevayler-factory/docs/prevayler-factory-2.6-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/org.prevayler/prevayler-factory/srcs/prevayler-factory-2.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

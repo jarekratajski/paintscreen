@@ -19,7 +19,7 @@ class MainService extends  Actor with PaintService {
 
   def receive = runRoute(paintRoute ~ normalRoute)
 
-  def propagate(ev:GraphicObject ) = {
+  def propagate(ev:Seq[GraphicObject ]) = {
     System.out.println("kuku")
     //context.actorSelection("/user/events") ! EventsActor.Send(ev)
     MainService.events ! EventsActor.Send(ev)

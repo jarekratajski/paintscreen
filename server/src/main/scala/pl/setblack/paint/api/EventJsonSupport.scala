@@ -5,9 +5,7 @@ import org.json4s.native.Serialization
 import spray.httpx.SprayJsonSupport
 import spray.json.DefaultJsonProtocol
 
-/**
- * Created by Kanapka on 1/11/2015.
- */
+
 class EventJsonSupport {
 
 }

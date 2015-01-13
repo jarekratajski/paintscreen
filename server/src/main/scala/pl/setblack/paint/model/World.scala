@@ -7,4 +7,5 @@ import scala.collection.Seq
  */
 class World extends Serializable{
     var rooms : Seq[Room] = Nil
+
 }
