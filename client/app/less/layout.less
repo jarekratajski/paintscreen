@@ -33,6 +33,7 @@ body {
           background: transparent;
           z-index: 10;
           cursor: default; 
+          overflow: hidden;
               > figure {
                   color: white;
                   position: absolute;
@@ -46,6 +47,13 @@ body {
                   opacity: 0;
                   -webkit-animation:  disap 20s ease-in;
               } 
+              > canvas {
+                   position: absolute;
+                   z-index: 11;
+                   opacity: 0;
+                   -webkit-animation:  disap 1.75s ease-in;
+                   background: transparent;
+              }
           }
       }
       > footer {

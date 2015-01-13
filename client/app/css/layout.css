@@ -42,6 +42,7 @@ body > section > article {
   background: transparent;
   z-index: 10;
   cursor: default;
+  overflow: hidden;
 }
 body > section > article > figure {
   color: white;
@@ -55,6 +56,13 @@ body > section > article > figure {
   z-index: 1;
   opacity: 0;
   -webkit-animation: disap 20s ease-in;
+}
+body > section > article > canvas {
+  position: absolute;
+  z-index: 11;
+  opacity: 0;
+  -webkit-animation: disap 1.75s ease-in;
+  background: transparent;
 }
 body > footer {
   position: absolute;

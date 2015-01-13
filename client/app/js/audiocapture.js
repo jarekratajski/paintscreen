@@ -1,3 +1,6 @@
+
+var mediaStream;
+var rec;
 function prepareRecording() {
     var navigator = window.navigator;
     navigator.getUserMedia = (
@@ -8,14 +11,7 @@ function prepareRecording() {
             );
     var Context = window.AudioContext || window.webkitAudioContext;
     window.context = new Context();
-
-}
-
-
-var mediaStream;
-var rec;
-function record() {
-  // ask for permission and start recording
+     // ask for permission and start recording
   navigator.getUserMedia({audio: true}, function(localMediaStream){
     mediaStream = localMediaStream;
 
@@ -25,28 +21,40 @@ function record() {
     // create new instance of Recorder.js using the mediaStreamSource
     rec = new Recorder(mediaStreamSource, {
       // pass the path to recorderWorker.js file here
-      workerPath: 'bower_components/recorderjs/recorderWorker.js'
+      workerPath: 'bower_components/recorderjs/recorderWorker.js',
+      bufferLen : 256
     });
 
-    // start recording
-    rec.record();
+    
   }, function(err){
     console.log('Browser not supported');
   });
+
 }
 
-function stop() {
+
+function record() {
+ 
+    rec.record();
+ 
+}
+
+function stop(callback) {
+    var max = 100;
+    var skip =5;
    rec.getBuffer( function(data) {
-      console.log( data[0].length);
-      var len = Math.floor(data[0].length/100);
+      
+      var len = Math.floor(data[0].length);
+      console.log(len);
       var arr=[];
-      for (var i = 0; i< data[0].length; i+=len) {
+      for (var i = 0; i< data[0].length && arr.length < max; i+=skip) {
         arr.push((data[0])[i]);
       }
-      console.log(arr);
+      callback(arr);
+        rec.clear();
   });
     // stop the media stream
-  mediaStream.stop();
+  // mediaStream.stop();
   
   
   // stop Recorder.js
