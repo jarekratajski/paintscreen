@@ -14,6 +14,7 @@ object EventJsonSupport extends DefaultJsonProtocol with SprayJsonSupport {
   implicit val formats = Serialization.formats(ShortTypeHints(List(
     classOf[InputEvent],
     classOf[PutPixelEvent],
-    classOf[SetColorEvent]
+    classOf[SetColorEvent],
+    classOf[WaveEvent]
   )))
 }

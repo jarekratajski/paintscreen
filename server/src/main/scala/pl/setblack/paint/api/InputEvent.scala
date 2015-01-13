@@ -7,3 +7,5 @@ case class PutPixelEvent(val x:Double, val y:Double, val radius: Double, val ses
     extends InputEvent
 case class SetColorEvent(val  c:String,  val session:Long)
   extends InputEvent
+case class WaveEvent(val  wave:Seq[Float],  val session:Long)
+  extends InputEvent
