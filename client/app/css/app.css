@@ -61,8 +61,10 @@ body > section > article > canvas {
   position: absolute;
   z-index: 11;
   opacity: 0;
-  -webkit-animation: disapC 1.75s ease-in;
   background: transparent;
+}
+body > section > article > canvas.animated {
+  -webkit-animation: disapC 1.75s ease-in;
 }
 body > footer {
   position: absolute;

@@ -51,9 +51,12 @@ body {
                    position: absolute;
                    z-index: 11;
                    opacity: 0;
-                   -webkit-animation:  disapC  1.75s ease-in;
+                   
                    background: transparent;
-              }
+                   &.animated  {
+                       -webkit-animation:  disapC  1.75s ease-in;
+                   }
+              } 
           }
       }
       > footer {
