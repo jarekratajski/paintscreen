@@ -5,30 +5,33 @@
     <title>PaintScreen</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <link rel="stylesheet" href="css/app.css"/>
-    
+
 </head>
 <body data-ng-app="paintscreen">
     <section class="main" data-ng-controller="paintCtrl">
-    <header>
-        <ul>
-            <li>PaintScreen</li>
-            <li>Draw</li>
-            <li> <input type="color" name="favcolor" data-ng-model="color" data-ng-change="colorChanged()"></li>
-            <li><button data-ng-click="record()">Rec</button></li>
-        </ul>
-    </header>
-    <article class="screen" data-ng-mousemove="mouseMoved($event)"
-              data-ng-mouseup="mouseUp()" data-ng-mousedown="mouseDown()" data-semi-canvas="state.objects">
-              <!--
-            <figure data-ng-repeat="obj in state.objects" style="left: {{obj.x}}%;top:{{obj.y}}%"/>
-                -->
-    </article>
-    
-    
-    <footer></footer>
-  </section>
+        <header>
+            
+        </header>
+        <nav>
+            <ul>
+                <li>PaintScreen</li>
+                <li>Draw</li>
+                <li> <input type="color" name="favcolor" data-ng-model="color" data-ng-change="colorChanged()"></li>
+                <li><button data-ng-click="record()">Rec</button></li>
+            </ul>
+        </nav>
+        <article class="screen" data-ng-mousemove="mouseMoved($event)"
+                 data-ng-mouseup="mouseUp()" data-ng-mousedown="mouseDown()" data-semi-canvas="state.objects">
+            <!--
+          <figure data-ng-repeat="obj in state.objects" style="left: {{obj.x}}%;top:{{obj.y}}%"/>
+            -->
+        </article>
+
+
+        <footer></footer>
+    </section>
 
 
     <!-- bower:js -->
@@ -38,8 +41,11 @@
     <script src="../bower_components/recorderjs/recorder.js"></script>
     <!-- endbower -->
 
-   <script src="js/paintscreen.js"></script>
-   <script src="js/audiocapture.js"></script>
+    <script src="js/paintscreen.js"></script>
+    <script src="js/paintscreen.service.js"></script>
+    <script src="js/paintscreen.controller.js"></script>
+    <script src="js/semicanvas.directive.js"></script>
+    <script src="js/audiocapture.js"></script>
     <script src="//localhost:35729/livereload.js"></script>
     <div data-spinner="globalSpinner"></div>
 </body>
