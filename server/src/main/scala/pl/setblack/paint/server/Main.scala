@@ -16,12 +16,14 @@ class MainService extends  Actor with PaintService {
 
 
   def actorRefFactory = context
+  // static files
+  val normalRoute  = pathPrefix("") {
+    getFromDirectory("../client/app/")
+  }
 
   def receive = runRoute(paintRoute ~ normalRoute)
 
   def propagate(ev:Seq[GraphicObject ]) = {
-    System.out.println("kuku")
-    //context.actorSelection("/user/events") ! EventsActor.Send(ev)
     MainService.events ! EventsActor.Send(ev)
   }
 }
@@ -45,9 +47,7 @@ object MainService {
     implicit val timeout = Timeout(5.seconds)
 
     IO(Http) ? Http.Bind(service, interface = Configuration.host, port = Configuration.portHttp)
-
   }
-
 }
 
 object Configuration {

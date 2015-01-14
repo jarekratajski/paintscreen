@@ -14,7 +14,8 @@ class Room(val name: String) extends Serializable {
  val sessionsSequence = new Sequence()
  val objectsSequence = new Sequence()
  val colors  = new ConcurrentSkipListMap[Long,String]()
- def toView = new RoomView(name, objects.toIndexedSeq, sessionsSequence.generateId())
+ def toView = new RoomView(name, objects.toIndexedSeq.map( x=>x.toView), sessionsSequence.generateId())
+ System.out.println("Room created")
 
 def getColor( ses:Long):String = {
  if ( colors.containsKey(ses))  {
@@ -26,20 +27,21 @@ def getColor( ses:Long):String = {
  def processEvent(event:InputEvent):Seq[GraphicObject] = {
   event match {
    case PutPixelEvent(x,y,r,ses) =>
-
     val pixel = new Pixel(objectsSequence.generateId(),  x ,y,r, getColor(ses))
-    System.out.println("event!" + x + "," + y)
+
     objects.add(pixel)
     Seq(pixel)
    case SetColorEvent(c,ses) =>
     colors.put(ses,c)
       Nil
    case WaveEvent(data,ses) =>
-
+      val wave = new Wave(objectsSequence.generateId(),data)
+     objects.add(wave)
+     Seq(wave)
    case _ =>
       Nil
   }
  }
 }
 
-case class RoomView(val name: String, val objects: Seq[GraphicObject], val sessionId:Long)
+case class RoomView(val name: String, val objects: Seq[GraphicObjectView], val sessionId:Long)
