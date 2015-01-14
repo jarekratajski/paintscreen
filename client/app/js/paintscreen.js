@@ -15,10 +15,15 @@ paintscreen.directive('semiCanvas', ['$parse', function($parse) {
           var  objects = getter(scope);
           
           for (var index = newV-1; index >= oldV; index--) {
-              var figure  =jQuery("<figure>");
+              
               var obj = objects[index];
-              figure.attr('style', 'left:'+obj.x +"%;top:"+obj.y+"%;");
-              element.append(figure);
+              if (obj.jsonClass === 'PixelView') {
+                    var figure  =jQuery("<figure>");
+                    figure.attr('style', 'left:'+obj.x +"%;top:"+obj.y+"%;background-color:"+obj.c+";");
+                    element.append(figure);
+                } else if (obj.jsonClass === 'WaveView'){
+                    element.append( drawWave(obj.wave));
+                }
           }
       });
   }
@@ -26,6 +31,43 @@ paintscreen.directive('semiCanvas', ['$parse', function($parse) {
       link : link
   };
 }]);
+
+function drawWave(data){
+           var canvas = jQuery("<canvas width='1000' height='1000'>");
+           
+           canvas.width("100%");
+           canvas.height("100%");
+         //  jQuery("article").append(canvas);
+           
+           
+           var c = canvas.get(0);
+           console.log(c.width+","+c.height);
+           
+           var ctx=c.getContext("2d");
+           ctx.beginPath();
+           ctx.lineWidth = 10;
+            ctx.moveTo(0,10);
+            ctx.lineTo(100,0);
+            ctx.stroke();
+           
+            ctx.beginPath();
+            ctx.strokeStyle = '#ff0000';
+            ctx.lineWidth = 10;
+            ctx.moveTo(0,500);
+
+            var dx  = 1000/data.length;
+            var dy = 300;
+            for ( var i = 0 ; i< data.length; i++ ) {
+                  ctx.lineTo( dx*i, 500+(data[i]*dy) );
+              
+               
+            }
+             ctx.stroke();
+             /*$timeout( function( ) {
+                    $scope.record();
+             }, 100);*/
+             return canvas;
+       }
 
 paintscreen.factory('paintService', ['$http', function ($http) {
         var WS = window['MozWebSocket'] ? MozWebSocket : WebSocket
@@ -83,46 +125,24 @@ paintscreen.controller('paintCtrl', ['$scope', '$timeout','paintService', functi
            
             record();
             $timeout( function() {
-                stop(drawWave);
-            }, 100);
+                stop(playWave);
+            }, 50);
        };
 
-       function drawWave(data){
-           var canvas = jQuery("<canvas width='1000' height='1000'>");
-           
-           canvas.width("100%");
-           canvas.height("100%");
-           jQuery("article").append(canvas);
-           
-           
-           var c = canvas.get(0);
-           console.log(c.width+","+c.height);
-           
-           var ctx=c.getContext("2d");
-           ctx.beginPath();
-           ctx.lineWidth = 10;
-            ctx.moveTo(0,10);
-            ctx.lineTo(100,0);
-            ctx.stroke();
-           
-            ctx.beginPath();
-            ctx.strokeStyle = '#ff0000';
-            ctx.lineWidth = 10;
-            ctx.moveTo(0,500);
-
-            var dx  = 1000/data.length;
-            var dy = 1000;
-            for ( var i = 0 ; i< data.length; i++ ) {
-                  ctx.lineTo( dx*i, 500+(data[i]*dy) );
-              
-               
-            }
-             ctx.stroke();
-             $timeout( function( ) {
+       function playWave(data)  {
+            var max = Math.max.apply(null, data);
+            if  ( max > 0.15) {
+                var ev = {"jsonClass":"WaveEvent","wave": data };
+                paintService.postEvent(ev);
+            } 
+              $timeout( function( ) {
                     $scope.record();
-             }, 500);
-          
+             }, 100);
+            
        }
+       
+
+       
        
        $scope.coloe = 1;
        
