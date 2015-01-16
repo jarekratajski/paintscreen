@@ -34,7 +34,5 @@ describe('grunt-karma', function () {
         });
     });
 
-
-
 });
 

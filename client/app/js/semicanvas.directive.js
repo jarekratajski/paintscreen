@@ -11,7 +11,6 @@ paintscreen.directive('semiCanvas', ['$parse', function($parse) {
           var  objects = getter(scope);
           
           for (var index = newV-1; index >= oldV; index--) {
-              
               var obj = objects[index];
               if (obj.jsonClass === 'PixelView') {
                     var figure  =jQuery("<figure>");

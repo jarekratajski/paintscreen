@@ -39,7 +39,7 @@ paintscreen.factory('paintService', ['$http', function ($http) {
                             state.objects.push(arr[i]); 
                     }
                     if (state.objects.length >1200) {
-                        state.objects.slice(0,200);
+                        state.objects.splice(0,200);
                     }
                     
             }

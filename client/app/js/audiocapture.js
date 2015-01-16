@@ -1,3 +1,12 @@
+/**
+ *  Capture audio stream
+ * 
+ *  usage
+ *  prepareRecording;
+ *  record()
+ *  stop( callback ) 
+ * 
+ */
 
 var mediaStream;
 var rec;
@@ -32,15 +41,12 @@ function prepareRecording() {
 
 }
 
-
 function record() {
- 
     rec.record();
- 
 }
 
 function stop(callback) {
-    var max = 100;
+    var max = 10;
     var skip =5;
    rec.getBuffer( function(data) {
       
@@ -48,18 +54,11 @@ function stop(callback) {
       console.log(len);
       var arr=[];
       for (var i = 0; i< data[0].length && arr.length < max; i+=skip) {
-        arr.push((data[0])[i]);
+          var val =(data[0])[i]; 
+        arr.push(Math.round(val*100)/100);
       }
       callback(arr);
         rec.clear();
   });
-    // stop the media stream
-  // mediaStream.stop();
-  
-  
-  // stop Recorder.js
   rec.stop();
-
-  
-  
 }
