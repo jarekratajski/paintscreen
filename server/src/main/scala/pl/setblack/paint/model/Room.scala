@@ -14,7 +14,7 @@ class Room(val name: String) extends Serializable {
  val sessionsSequence = new Sequence()
  val objectsSequence = new Sequence()
  val colors  = new ConcurrentSkipListMap[Long,String]()
- def toView = new RoomView(name, objects.toIndexedSeq.map( x=>x.toView).takeRight(1000), sessionsSequence.generateId())
+ def toView = new RoomView(name, objects.map( x=>x.toView).takeRight(1000).toArray, sessionsSequence.generateId())
  System.out.println("Room created")
 
 def getColor( ses:Long):String = {
@@ -44,4 +44,4 @@ def getColor( ses:Long):String = {
  }
 }
 
-case class RoomView(val name: String, val objects: Seq[GraphicObjectView], val sessionId:Long)
+case class RoomView(val name: String, val objects: Array[GraphicObjectView], val sessionId:Long)

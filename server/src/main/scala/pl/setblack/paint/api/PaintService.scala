@@ -4,6 +4,7 @@ import java.awt.Color
 import java.util.function.Supplier
 
 import akka.actor.{ActorSystem, Actor}
+import org.json4s._
 import org.json4s.ShortTypeHints
 import org.json4s.native.Serialization
 import pl.setblack.airomem.core.SimpleController
@@ -19,16 +20,13 @@ import pl.setblack.paint.util.JavaIntegration._
 
 trait PaintService extends HttpService {
 
-   val roomSupplier : Supplier[Room] = (() => new Room("default") )
+  val roomSupplier : Supplier[Room] = (() => new Room("default") )
   val roomController:SimpleController[Room]  = loadOptional("room", roomSupplier)
-  val room = new Room("default")
-
-
 
   def propagate(ev:Seq[GraphicObject])
 
   val paintRoute = path("services" / "paint") {
-    import EventJsonSupport._
+
 
     import org.json4s.native.Serialization.{read, write}
     get {
@@ -45,7 +43,8 @@ trait PaintService extends HttpService {
         respondWithMediaType(`application/json`) {
           entity(as[String]) { serialized =>
             complete {
-              val event = read[InputEvent](serialized)
+              import EventJsonSupport._
+              val event = deserializeEvent(serialized)
               val  processed:Seq[GraphicObject] = roomController.executeAndQuery(
                 (r:Room) => r.processEvent(event))
               propagate ( processed)
