@@ -5,6 +5,11 @@ paintscreen.controller('actionsCtrl', ['$scope', '$timeout', 'paintService', fun
         $scope.colorChanged = function () {
             paintService.postEvent(createSetColorEvent($scope.color));
         };
+        
+         var createSetColorEvent = function (c) {
+            return {"jsonClass": "SetColorEvent", "c": c};
+        };
+        
         //lets configure recording
         prepareRecording();
         $scope.record = function () {

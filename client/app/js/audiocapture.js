@@ -46,8 +46,8 @@ function record() {
 }
 
 function stop(callback) {
-    var max = 10;
-    var skip =5;
+    var max = 100;
+    var skip =3;
    rec.getBuffer( function(data) {
       
       var len = Math.floor(data[0].length);

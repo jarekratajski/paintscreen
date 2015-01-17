@@ -1,4 +1,4 @@
-describe('grunt-karma', function () {
+describe('paintscreen service', function () {
     var paintService = null;
     var postedEvents = [];
     var httpBackend;

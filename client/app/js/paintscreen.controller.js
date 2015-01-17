@@ -27,9 +27,7 @@ paintscreen.controller('paintCtrl', ['$scope', '$timeout', 'paintService', funct
             return {"jsonClass": "PutPixelEvent", x: x * 100, y: y * 100, radius: 4.0};
         };
 
-        var createSetColorEvent = function (c) {
-            return {"jsonClass": "SetColorEvent", "c": c};
-        };
+       
         $scope.drawObject = function (obj) {
             $scope.state.objects.push(obj);
         };
