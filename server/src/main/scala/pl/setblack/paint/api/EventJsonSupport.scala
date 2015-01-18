@@ -14,8 +14,7 @@ class EventJsonSupport {
 object EventJsonSupport {
   implicit val formatsEvents = Serialization.formats(ShortTypeHints(List(
     classOf[WaveEvent],
-    classOf[PutPixelEvent],
-    classOf[SetColorEvent]
+    classOf[PutPixelEvent]
 
   )))
 

@@ -1,9 +1,8 @@
 package pl.setblack.paint.model
 
-import java.awt.Color
-import java.util.concurrent.{ConcurrentSkipListMap, ConcurrentNavigableMap, CopyOnWriteArrayList}
+import java.util.concurrent.{ConcurrentSkipListMap,  CopyOnWriteArrayList}
 import pl.setblack.airomem.core.sequnce.Sequence
-import pl.setblack.paint.api.{WaveEvent, SetColorEvent, PutPixelEvent, InputEvent}
+import pl.setblack.paint.api.{WaveEvent, PutPixelEvent, InputEvent}
 
 import scala.collection.JavaConversions._
 import scala.collection.Seq
@@ -17,23 +16,13 @@ class Room(val name: String) extends Serializable {
  def toView = new RoomView(name, objects.map( x=>x.toView).takeRight(1000).toArray, sessionsSequence.generateId())
  System.out.println("Room created")
 
-def getColor( ses:Long):String = {
- if ( colors.containsKey(ses))  {
-  colors.get(ses);
- } else {
-  "#ffffff"
- }
-}
+
  def processEvent(event:InputEvent):Seq[GraphicObject] = {
   event match {
    case PutPixelEvent(x,y,r,ses) =>
-    val pixel = new Pixel(objectsSequence.generateId(),  x ,y,r, getColor(ses))
-
+    val pixel = new Pixel(objectsSequence.generateId(),  x ,y,r, "#ffffff")
     objects.add(pixel)
     Seq(pixel)
-   case SetColorEvent(c,ses) =>
-    colors.put(ses,c)
-      Nil
    case WaveEvent(data,ses) =>
       val wave = new Wave(objectsSequence.generateId(),data)
      objects.add(wave)
