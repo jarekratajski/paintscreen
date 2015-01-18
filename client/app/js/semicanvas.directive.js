@@ -2,7 +2,7 @@ paintscreen.directive('semiCanvas', ['$parse', function($parse) {
    var creators = {
     'PixelView': function( obj) {
                     var figure  =jQuery("<figure>");
-                    figure.attr('style', 'left:'+obj.x +"%;top:"+obj.y+"%;background-color:"+obj.c+";");
+                    figure.attr('style', 'left:'+obj.x +"%;top:"+obj.y+"%");
                     return figure;
     },
     'WaveView' : function(obj) {

@@ -1,15 +1,6 @@
 //main controller  of paintScreen
 paintscreen.controller('actionsCtrl', ['$scope', '$timeout', 'paintService', function ($scope, $timeout, paintService) {
-         $scope.color= "#ffffff";
-
-        $scope.colorChanged = function () {
-            paintService.postEvent(createSetColorEvent($scope.color));
-        };
-        
-         var createSetColorEvent = function (c) {
-            return {"jsonClass": "SetColorEvent", "c": c};
-        };
-        
+      
         //lets configure recording
         prepareRecording();
         $scope.record = function () {
