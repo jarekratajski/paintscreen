@@ -14,7 +14,7 @@ paintscreen.controller('paintCtrl', ['$scope', '$timeout', 'paintService', funct
         }
         paintService.registerObserver(attachNewObjects);
 
-        
+
         $scope.mouseMoved = function (event) {
             if ($scope.draw) {
                 var x = (event.clientX - event.currentTarget.offsetLeft) / event.currentTarget.offsetWidth;
