@@ -26,19 +26,15 @@ paintscreen.controller('paintCtrl', ['$scope', '$timeout', 'paintService', funct
         var createPutPixelEvent = function (x, y) {
             return {"jsonClass": "PutPixelEvent", x: x * 100, y: y * 100, radius: 4.0};
         };
-
-       
         $scope.drawObject = function (obj) {
             $scope.state.objects.push(obj);
         };
         $scope.mouseUp = function () {
             $scope.draw = false;
         };
-        
         $scope.mouseDown = function () {
             $scope.draw = true;
         };
-
     }]);
 
 

@@ -65,7 +65,7 @@ body {
                 margin: 0px;
                 z-index: 1;
                 opacity: 0;
-                -webkit-animation:  disap 60s ease-in ;
+                .animation( disap 60s ease-in );
             } 
             > canvas {
                 position: absolute;
@@ -74,7 +74,7 @@ body {
 
                 background: transparent;
                 &.animated  {
-                    -webkit-animation:  disapC  1.75s ease-in;
+                   .animation( disapC  1.75s ease-in);
                 }
             } 
         }
@@ -85,16 +85,3 @@ body {
         bottom: 0px;
     }
 }
-
-@-webkit-keyframes disap {
-    0% { opacity: 1; transform: scale(1) translateY(0px) }
-    70% { opacity: 1;transform: scale(1) translateY(0px) }
-    100% {opacity: 0; transform: scale(20) translateY(-200px)}
-}
-
-@-webkit-keyframes disapC {
-    0% { opacity: 1; transform: scale(1) translateY(0px) rotateZ(0deg)}
-    30% { opacity: 0.2;transform: scale(2) translateY(0px) rotateZ(10deg)}
-    100% {opacity: 0; transform: scale(20) translateY(-200px) rotateZ(80deg)}
-}
-
