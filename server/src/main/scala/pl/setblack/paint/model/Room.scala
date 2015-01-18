@@ -19,7 +19,7 @@ class Room(val name: String) extends Serializable {
 
 def getColor( ses:Long):String = {
  if ( colors.containsKey(ses))  {
-  return colors.get(ses);
+  colors.get(ses);
  } else {
   "#ffffff"
  }
@@ -44,4 +44,4 @@ def getColor( ses:Long):String = {
  }
 }
 
-case class RoomView(val name: String, val objects: Array[GraphicObjectView], val sessionId:Long)
+case class RoomView( name: String,  objects: Array[GraphicObjectView], sessionId:Long)

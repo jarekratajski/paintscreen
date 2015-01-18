@@ -1,7 +1,5 @@
 package pl.setblack.paint.server
 
-
-
 import akka.actor.{Actor, Props, ActorSystem}
 import akka.io.IO
 import akka.util.Timeout
@@ -13,7 +11,6 @@ import scala.concurrent.duration._
 import akka.pattern.ask
 
 class MainService extends  Actor with PaintService {
-
 
   def actorRefFactory = context
   // static files
@@ -34,8 +31,6 @@ object MainService {
 
 
   def main(args: Array[String]): Unit = {
-
-
 
     val rs = new ReactiveServer(Configuration.portWs)
     rs.forResource("/events/ws", Some(events))

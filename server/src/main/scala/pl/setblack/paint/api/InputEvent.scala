@@ -3,9 +3,9 @@ package pl.setblack.paint.api
 abstract class InputEvent {
   def session:Long
 }
-case class PutPixelEvent(val x:Double, val y:Double, val radius: Double, val session:Long)
+case class PutPixelEvent(x:Double, y:Double,  radius: Double,session:Long)
     extends InputEvent
-case class SetColorEvent(val  c:String,  val session:Long)
+case class SetColorEvent( c:String,   session:Long)
   extends InputEvent
-case class WaveEvent(val  wave:Array[Float],  val session:Long)
+case class WaveEvent(  wave:Array[Float],   session:Long)
   extends InputEvent

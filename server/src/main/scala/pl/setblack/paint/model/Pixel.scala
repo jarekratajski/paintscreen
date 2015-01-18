@@ -1,7 +1,5 @@
 package pl.setblack.paint.model
 
-import java.awt.Color
-
 import pl.setblack.paint.api.{PutPixelEvent, InputEvent}
 
 
@@ -16,7 +14,7 @@ class Pixel( id: Long,
 }
 
 case class PixelView( id: Long,
-                      val x:Double,
-                      val y:Double,
-                      val radius:Double,
-                      val c: String) extends GraphicObjectView
+                      x:Double,
+                      y:Double,
+                      radius:Double,
+                      c: String) extends GraphicObjectView
