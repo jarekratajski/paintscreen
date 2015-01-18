@@ -11,8 +11,7 @@ import pl.setblack.paint.util.JavaIntegration._
 
 trait PaintService extends HttpService {
 
-  val roomSupplier: Supplier[Room] = (() => new Room("default"))
-  var roomController: SimpleController[Room] = loadOptional("room", roomSupplier)
+  val room = new Room("mainRoom")
 
 
   def propagate(ev: Seq[GraphicObject])
@@ -25,8 +24,7 @@ trait PaintService extends HttpService {
       respondWithMediaType(`application/json`) {
         complete {
           import PixelJsonSupport._
-          write[RoomView](roomController.query((r: Room) => r.toView)
-          )(formatsPixel).toString
+          write[RoomView]( room.toView)(formatsPixel).toString
 
         }
       }
@@ -36,11 +34,9 @@ trait PaintService extends HttpService {
         respondWithMediaType(`application/json`) {
           entity(as[String]) { serialized =>
             complete {
-              println("posted")
               import EventJsonSupport._
               val event = deserializeEvent(serialized)
-              val processed: Seq[GraphicObject] = roomController.executeAndQuery(
-                (r: Room) => r.processEvent(event))
+              val processed: Seq[GraphicObject] = room.processEvent(event)
               propagate(processed)
               "{\"status\": \"ok\"}"
             }
