@@ -21,6 +21,16 @@ class EventJsonSupportTest extends FlatSpec with Matchers {
     event should equal (PutPixelEvent(7,5,2,1))
   }
 
+  "SetColorEvent" should "be serialized" in {
+    val event = SetColorEvent("#ffff00",1)
+    val serialized = write(event);
+    serialized should equal ("""{"jsonClass":"SetColorEvent","c":"#ffff00","session":1}""")
+  }
+  "SetColorEvent" should "be deserialized" in {
+    val serialized = """{"jsonClass":"SetColorEvent","c":"#ffff00","session":1}"""
+    val event = read[InputEvent](serialized)
+    event should equal (SetColorEvent("#ffff00",1))
+  }
 
   "WaveEvent" should "be deserialized" in {
     val serialized =
@@ -31,6 +41,8 @@ class EventJsonSupportTest extends FlatSpec with Matchers {
     }
 
   "deserializeEvent" should "deserialized wave" in {
+    val serializedSC = """{"jsonClass":"SetColorEvent","c":"#ffff00","session":1}"""
+    val eventSC = read[InputEvent](serializedSC)
     val serialized =
       """{"jsonClass":"WaveEvent","wave":[-0.14,-0.16,-0.17,-0.28,-0.13,0.1,0,0.18,0.41,0.1],"session":2}""".stripMargin
     for( a <- 1 until 10) {
